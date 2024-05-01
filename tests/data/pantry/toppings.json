@@ -1,0 +1,12 @@
+{
+  "burger": {
+    "toppings": [
+      "american cheese",
+      "mayo",
+      "mustard",
+      "lettuce",
+      "tomato",
+      "pickles"
+    ]
+  }
+}

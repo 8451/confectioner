@@ -1,0 +1,7 @@
+- ingredients:
+  - ../pantry/patty.json
+  - ../pantry/bun.json
+  - ../pantry/toppings.json
+- spicy: True
+  ingredients:
+  - ../pantry/jalepenos.json

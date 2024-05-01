@@ -1,0 +1,91 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "confectioner"
+authors = [
+    {name = "Austin Warner", email = "austin.warner@8451.com"},
+]
+description = "A modular config framework for Python applications"
+readme = "README.md"
+requires-python = ">=3.8"
+classifiers = [
+    "Development Status :: 1 - Planning",
+    "License :: Other/Proprietary License",
+    "Operating System :: MacOS",
+    "Operating System :: Microsoft :: Windows",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.6",
+    "Programming Language :: Python :: 3.7",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python",
+]
+dependencies = [
+    "PyYAML>=5.0",
+    "typing_extensions>=4.0; python_version<\"3.10\"",
+]
+dynamic = ["version"]
+
+[project.license]
+file = "LICENSE"
+
+[tool.hatch.version]
+path = "confectioner/_version.py"
+
+[project.urls]
+repository = "https://github.com/8451/confectioner"
+documentation = "https://8451.github.io/confectioner"
+bugs = "https://github.com/8451/confectioner/issues"
+
+[project.optional-dependencies]
+test = [
+    "coverage",
+    "coverage-badge",
+    "pytest",
+    "pytest-cov",
+]
+doc = [
+    "nbsphinx",
+    "recommonmark",
+    "sphinx",
+    "sphinx_rtd_theme",
+    "sphinxcontrib.napoleon",
+    "myst-parser",
+    "sphinxemoji",
+]
+dev = [
+    "bump2version",
+    "mypy",
+    "black",
+    "flake8>=3.7.9",
+    "pre-commit",
+    "coverage",
+    "confectioner[test]",
+    "confectioner[doc]",
+]
+
+[tool.pytest.ini_options]
+testpaths = [
+    "tests/"
+]
+
+[tool.black]
+line-length = 88
+include = '\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | _build
+  | buck-out
+  | build
+  | dist
+)/
+'''

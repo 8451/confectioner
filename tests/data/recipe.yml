@@ -1,0 +1,17 @@
+- ingredients: pantry/water.json
+- day:
+  - Friday
+  - Saturday
+  ingredients: pantry/wine.json
+
+- microwave: True
+  ingredients: pantry/easy-mac.json
+- microwave: False
+  recipes:
+  - meals/burger.yml
+  - meals/salad.yml
+
+- combo: lunch
+  ingredients: pantry/soda.json
+  recipes:
+    - meals/burger.yml

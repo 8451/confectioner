@@ -1,0 +1,10 @@
+- day:
+    - friday
+    - saturday
+  ingredients: wine.json
+- else:
+  treat: True
+  ingredients: lemonade.json
+- else:
+  ingredients: water.json
+- ingredients: plate.json
