@@ -38,7 +38,7 @@ jobs:
         flake8 confectioner --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
-        pytest
+        pytest --cov=confectioner --cov-report=xml
     - name: Update coverage badge
       if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.python-version == '3.9'}}
       run: |
