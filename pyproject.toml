@@ -12,7 +12,7 @@ description = "A modular config framework for Python applications"
 readme = "README.md"
 requires-python = ">=3.8"
 classifiers = [
-    "Development Status :: 1 - Planning",
+    "Development Status :: 5 - Production/Stable",
     "License :: Other/Proprietary License",
     "Operating System :: MacOS",
     "Operating System :: Microsoft :: Windows",
