@@ -5,18 +5,16 @@ an [issue on the repo](https://github.com/8451/confectioner/issues/new/choose). 
 solution yourself, us the following flow:
 
 1. Read the [style guide](#style-guide) below
-2. Tag Austin Warner (austinwarner-8451) in the issue and request to be assigned the issue
+2. Tag @8451/cobra-owners in the issue and request to be assigned the issue
    - If this is your first time contributing, ask to be granted write access to the repo
 3. Create a new branch based off of [develop](https://github.com/8451/confectioner/tree/develop)
    - Give your branch a name starting with `feature/`, `bug/` or `misc/`
-   - For example, if you were requesting that toml files be supported by default, create
-     a branch called `feature/toml`
 4. Clone the repo in your favorite IDE, check out your new branch, and add your changes
 5. Run the tests to ensure nothing breaks
    - `pip install -e .[test]`
    - `pytest`
 6. Push the changes on your branch to the repo, and open a Pull Request where the base branch is `develop`
-   - Request a review from Austin Warner
+   - Request a review from @8451/cobra-owners
 
 ## Style Guide
 
