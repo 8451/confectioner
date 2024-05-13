@@ -6,6 +6,7 @@ build-backend = "hatchling.build"
 name = "confectioner"
 authors = [
     {name = "Austin Warner", email = "austin.warner@8451.com"},
+    {name = "Michael Stoepel", email = "michael.stoepel@8451.com"},
 ]
 description = "A modular config framework for Python applications"
 readme = "README.md"
@@ -17,11 +18,11 @@ classifiers = [
     "Operating System :: Microsoft :: Windows",
     "Operating System :: POSIX :: Linux",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.6",
-    "Programming Language :: Python :: 3.7",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
     "Programming Language :: Python",
 ]
 dependencies = [
