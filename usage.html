@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Usage &mdash; confectioner 1.1.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=fc837d61"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Confectioner API" href="api.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            confectioner
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">References</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Usage</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#a-simple-example">A Simple Example</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#conf-dev-json">conf/dev.json</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#conf-prd-json">conf/prd.json</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#conf-config-json">conf/config.json</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#directory-structure">Directory Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">conf/dev.json</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">conf/prd.json</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#conf-global-json">conf/global.json</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#recipe-yml">recipe.yml</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#what-it-s-doing">What It’s Doing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id3">recipe.yml</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#global">Global</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dev">Dev</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#prd">Prd</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#templating">Templating</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#more-complex-recipes">More Complex Recipes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#multiple-match-conditions">Multiple Match Conditions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multiple-ingredients">Multiple Ingredients</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#list-conditions">List conditions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#sub-recipes">Sub-Recipes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#before">Before</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#after">After</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#string-formatting-in-recipes">String Formatting in Recipes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id8">Directory Structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id9">recipe.yml</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#else-blocks">Else Blocks</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-baker-objects">Creating Baker Objects</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id10">Directory Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mypackage-main-py">mypackage/main.py</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#extending-io">Extending IO</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#registering-a-reader">Registering a Reader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#registering-a-loader">Registering a Loader</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributing.html">Contributing</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">confectioner</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Usage</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/usage.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="usage">
+<h1>Usage<a class="headerlink" href="#usage" title="Link to this heading"></a></h1>
+<p>Confectioner is a framework for organizing configuration files in a composable way. Confectioner is built around the idea of
+<em>recipes</em> and <em>ingredients</em>. Ingredients are the config files that you actually use in your program (usually JSON),
+while recipes are config files that declare how to combine different ingredients given a set of parameters. Recipes
+can themselves contain ingredients or more recipes.</p>
+<section id="a-simple-example">
+<h2>A Simple Example<a class="headerlink" href="#a-simple-example" title="Link to this heading"></a></h2>
+<p>Let’s say that your application can runs in a dev environment and a prod environment, but it has a few parameters that
+are different depending on the environment. Without confectioner, you might have two config files like this:</p>
+<section id="conf-dev-json">
+<h3>conf/dev.json<a class="headerlink" href="#conf-dev-json" title="Link to this heading"></a></h3>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;PROJECT_ROOT&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;s3://dev_bucket&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;INPUT_SUBPATH&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;inputs&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;OUTPUT_SUBPATH&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;output&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="conf-prd-json">
+<h3>conf/prd.json<a class="headerlink" href="#conf-prd-json" title="Link to this heading"></a></h3>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;PROJECT_ROOT&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;s3://prd_bucket&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;INPUT_SUBPATH&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;inputs&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;OUTPUT_SUBPATH&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;output&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This works, but we had to duplicate options across config files, which means if there are any updates we need to update
+both files. Instead, we could merge the files like this.</p>
+</section>
+<section id="conf-config-json">
+<h3>conf/config.json<a class="headerlink" href="#conf-config-json" title="Link to this heading"></a></h3>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;DEV&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;PROJECT_ROOT&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;s3://dev_bucket&quot;</span><span class="w">  </span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;PRD&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;PROJECT_ROOT&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;s3://prd_bucket&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;COMMON&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;INPUT_SUBPATH&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;inputs&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;OUTPUT_SUBPATH&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;output&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This works at first, but in your code you have to keep track of which config entries are environment-specific. If you have
+a parameter that used to be the same across all environments and suddenly becomes environment-specific, you need to change
+your code to look in the environment-specific area rather than the common area.</p>
+<p>With confectioner, we handle this by separating the config into multiple files and then combining them at runtime. In this
+example, our configs would look like this</p>
+</section>
+<section id="directory-structure">
+<h3>Directory Structure<a class="headerlink" href="#directory-structure" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">recipe</span><span class="o">.</span><span class="n">yml</span>
+<span class="n">conf</span><span class="o">/</span>
+    <span class="n">dev</span><span class="o">.</span><span class="n">json</span>
+    <span class="n">prd</span><span class="o">.</span><span class="n">json</span>
+    <span class="k">global</span><span class="o">.</span><span class="n">json</span>
+</pre></div>
+</div>
+</section>
+<section id="id1">
+<h3>conf/dev.json<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;PROJECT_ROOT&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;s3://dev_bucket&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h3>conf/prd.json<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;PROJECT_ROOT&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;s3://prd_bucket&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="conf-global-json">
+<h3>conf/global.json<a class="headerlink" href="#conf-global-json" title="Link to this heading"></a></h3>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;INPUT_SUBPATH&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;inputs&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;OUTPUT_SUBPATH&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;output&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In order to combine the config files, we create a <em>recipe</em> file, here called <em>recipe.yml</em>.</p>
+</section>
+<section id="recipe-yml">
+<h3>recipe.yml<a class="headerlink" href="#recipe-yml" title="Link to this heading"></a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">ingredients</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conf/global.json</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dev</span>
+<span class="w">  </span><span class="nt">ingredients</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conf/dev.json</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prd</span>
+<span class="w">  </span><span class="nt">ingredients</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conf/prd.json</span><span class="w"> </span>
+</pre></div>
+</div>
+<p>To load in our config file, we use the confectioner <code class="docutils literal notranslate"><span class="pre">bake</span></code> function, and pass <code class="docutils literal notranslate"><span class="pre">env='dev'</span></code> or <code class="docutils literal notranslate"><span class="pre">env='prd'</span></code> to signify
+what files we want to load.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">confectioner</span> <span class="kn">import</span> <span class="n">bake</span>
+<span class="gp">&gt;&gt;&gt; </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bake</span><span class="p">(</span><span class="s1">&#39;recipe.yml&#39;</span><span class="p">,</span> <span class="n">env</span><span class="o">=</span><span class="s1">&#39;dev&#39;</span><span class="p">)</span>
+<span class="go">{&#39;INPUT_SUBPATH&#39;: &#39;inputs&#39;, &#39;OUTPUT_SUBPATH&#39;: &#39;outputs&#39;, </span>
+<span class="go">&#39;PROJECT_ROOT&#39;: &#39;s3://dev_bucket&#39;}</span>
+<span class="gp">&gt;&gt;&gt; </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bake</span><span class="p">(</span><span class="s1">&#39;recipe.yml&#39;</span><span class="p">,</span> <span class="n">env</span><span class="o">=</span><span class="s1">&#39;prd&#39;</span><span class="p">)</span>
+<span class="go">{&#39;INPUT_SUBPATH&#39;: &#39;inputs&#39;, &#39;OUTPUT_SUBPATH&#39;: &#39;outputs&#39;, </span>
+<span class="go">&#39;PROJECT_ROOT&#39;: &#39;s3://prd_bucket&#39;}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="what-it-s-doing">
+<h2>What It’s Doing<a class="headerlink" href="#what-it-s-doing" title="Link to this heading"></a></h2>
+<p>Let’s take a look at that simple recipe file we created and break down what it’s saying.</p>
+<section id="id3">
+<h3>recipe.yml<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">ingredients</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conf/global.json</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dev</span>
+<span class="w">  </span><span class="nt">ingredients</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conf/dev.json</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prd</span>
+<span class="w">  </span><span class="nt">ingredients</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conf/prd.json</span><span class="w"> </span>
+</pre></div>
+</div>
+<p>There are three entries listed here. Let’s break them down one-by-one.</p>
+</section>
+<section id="global">
+<h3>Global<a class="headerlink" href="#global" title="Link to this heading"></a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">ingredients</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conf/global.json</span>
+</pre></div>
+</div>
+<p>This entry only has the ingredients tag, so it will be included any time we run <code class="docutils literal notranslate"><span class="pre">bake</span></code> with this recipe. The ingredients
+are the <code class="docutils literal notranslate"><span class="pre">conf/global.json</span></code> file. Because that is a relative path, confectioner will look relative to the recipe file that
+included the ingredient.</p>
+</section>
+<section id="dev">
+<h3>Dev<a class="headerlink" href="#dev" title="Link to this heading"></a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dev</span>
+<span class="w">  </span><span class="nt">ingredients</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conf/dev.json</span>
+</pre></div>
+</div>
+<p>This entry has <code class="docutils literal notranslate"><span class="pre">env:</span> <span class="pre">dev</span></code>, so it will only be included when we pass <code class="docutils literal notranslate"><span class="pre">env='dev'</span></code></p>
+</section>
+<section id="prd">
+<h3>Prd<a class="headerlink" href="#prd" title="Link to this heading"></a></h3>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prd</span>
+<span class="w">  </span><span class="nt">ingredients</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">conf/prd.json</span><span class="w"> </span>
+</pre></div>
+</div>
+<p>This entry has <code class="docutils literal notranslate"><span class="pre">env:</span> <span class="pre">prd</span></code>, so it will only be included when we pass <code class="docutils literal notranslate"><span class="pre">env='prd'</span></code></p>
+</section>
+</section>
+<section id="templating">
+<h2>Templating<a class="headerlink" href="#templating" title="Link to this heading"></a></h2>
+<p>Confectioner supports templating in ingredients files. This allows confectioner to dynamically generate config entries based on
+other config entries. For example, let’s say we have a config file that looks like this:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;PROJECT_ROOT&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;s3://dev_bucket&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;INPUT_SUBPATH&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;inputs&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;INPUT_PATH&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;{PROJECT_ROOT}/{INPUT_SUBPATH}&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>When this file is loaded, the <code class="docutils literal notranslate"><span class="pre">INPUT_PATH</span></code> entry will be populated with the value <code class="docutils literal notranslate"><span class="pre">&quot;s3://dev_bucket/inputs&quot;</span></code>.
+This allows us to avoid duplicating information across config files.</p>
+</section>
+<section id="more-complex-recipes">
+<h2>More Complex Recipes<a class="headerlink" href="#more-complex-recipes" title="Link to this heading"></a></h2>
+<section id="multiple-match-conditions">
+<h3>Multiple Match Conditions<a class="headerlink" href="#multiple-match-conditions" title="Link to this heading"></a></h3>
+<p>A recipe entry can use multiple match conditions. If every condition is met, then the ingredients are included.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dev</span>
+<span class="w">  </span><span class="nt">job</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">scoring</span>
+<span class="w">  </span><span class="nt">ingredients</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dev/scoring.json</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prd</span>
+<span class="w">  </span><span class="nt">job</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">scoring</span>
+<span class="w">  </span><span class="nt">ingredients</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prd/scoring.json</span>
+</pre></div>
+</div>
+</section>
+<section id="multiple-ingredients">
+<h3>Multiple Ingredients<a class="headerlink" href="#multiple-ingredients" title="Link to this heading"></a></h3>
+<p>A recipe entry can point to multiple files. For example, if we add a test environment, we could add a non-prod file that
+is included in both dev and test environments for any common configuration.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dev</span>
+<span class="w">  </span><span class="nt">ingredients</span><span class="p">:</span><span class="w"> </span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dev.json</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">non-prod.json</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tst</span>
+<span class="w">  </span><span class="nt">ingredients</span><span class="p">:</span><span class="w"> </span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tst.json</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">non-prod.json</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prd</span>
+<span class="w">  </span><span class="nt">ingredients</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prd.json</span>
+</pre></div>
+</div>
+</section>
+<section id="list-conditions">
+<h3>List conditions<a class="headerlink" href="#list-conditions" title="Link to this heading"></a></h3>
+<p>If a tag in a recipe contains a list, then it will match if the value passed to <code class="docutils literal notranslate"><span class="pre">bake</span></code> is in the list. We can accomplish
+the same thing as the prior example by adding an entry that matches either when
+either dev or prd is the environment.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dev</span>
+<span class="w">  </span><span class="nt">ingredients</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dev.json</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tst</span>
+<span class="w">  </span><span class="nt">ingredients</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tst.json</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">env</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dev</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">tst</span>
+<span class="w">  </span><span class="nt">ingredients</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">non-prod.json</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prd</span>
+<span class="w">  </span><span class="nt">ingredients</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prd.json</span>
+</pre></div>
+</div>
+</section>
+<section id="sub-recipes">
+<h3>Sub-Recipes<a class="headerlink" href="#sub-recipes" title="Link to this heading"></a></h3>
+<p>We can also include other recipes within our recipe. This makes our recipe files modular to increase readability.</p>
+<p>Let’s take the following recipe and break it up into smaller pieces</p>
+<section id="before">
+<h4>Before<a class="headerlink" href="#before" title="Link to this heading"></a></h4>
+<section id="id4">
+<h5>Directory Structure<a class="headerlink" href="#id4" title="Link to this heading"></a></h5>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">recipe</span><span class="o">.</span><span class="n">yml</span>
+<span class="n">jobs</span><span class="o">/</span>
+    <span class="n">dev</span><span class="o">/</span>
+        <span class="n">foo</span><span class="o">.</span><span class="n">json</span>
+        <span class="n">bar</span><span class="o">.</span><span class="n">json</span>
+    <span class="n">prd</span><span class="o">/</span>
+        <span class="n">foo</span><span class="o">.</span><span class="n">json</span>
+        <span class="n">bar</span><span class="o">.</span><span class="n">json</span>
+</pre></div>
+</div>
+</section>
+<section id="id5">
+<h5>recipe.yml<a class="headerlink" href="#id5" title="Link to this heading"></a></h5>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dev</span>
+<span class="w">  </span><span class="nt">job</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">foo</span>
+<span class="w">  </span><span class="nt">ingredients</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jobs/dev/foo.json</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dev</span>
+<span class="w">  </span><span class="nt">job</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bar</span>
+<span class="w">  </span><span class="nt">ingredients</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jobs/dev/bar.json</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prd</span>
+<span class="w">  </span><span class="nt">job</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">foo</span>
+<span class="w">  </span><span class="nt">ingredients</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jobs/prd/foo.json</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prd</span>
+<span class="w">  </span><span class="nt">job</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bar</span>
+<span class="w">  </span><span class="nt">ingredients</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jobs/prd/bar.json</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="after">
+<h4>After<a class="headerlink" href="#after" title="Link to this heading"></a></h4>
+<section id="id6">
+<h5>Directory Structure<a class="headerlink" href="#id6" title="Link to this heading"></a></h5>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">recipe</span><span class="o">.</span><span class="n">yml</span>
+<span class="n">recipes</span><span class="o">/</span>
+    <span class="n">dev</span><span class="o">.</span><span class="n">yml</span>
+    <span class="n">prd</span><span class="o">.</span><span class="n">yml</span>
+<span class="n">jobs</span><span class="o">/</span>
+    <span class="n">dev</span><span class="o">/</span>
+        <span class="n">foo</span><span class="o">.</span><span class="n">json</span>
+        <span class="n">bar</span><span class="o">.</span><span class="n">json</span>
+    <span class="n">prd</span><span class="o">/</span>
+        <span class="n">foo</span><span class="o">.</span><span class="n">json</span>
+        <span class="n">bar</span><span class="o">.</span><span class="n">json</span>
+</pre></div>
+</div>
+</section>
+<section id="id7">
+<h5>recipe.yml<a class="headerlink" href="#id7" title="Link to this heading"></a></h5>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dev</span>
+<span class="w">  </span><span class="nt">recipes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">recipes/dev.yml</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prd</span>
+<span class="w">  </span><span class="nt">recipes</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">recipes/prd.yml</span>
+</pre></div>
+</div>
+</section>
+<section id="recipes-dev-yml">
+<h5>recipes/dev.yml<a class="headerlink" href="#recipes-dev-yml" title="Link to this heading"></a></h5>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">job</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">foo</span>
+<span class="w">  </span><span class="nt">ingredients</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">../jobs/dev/foo.json</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">job</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bar</span>
+<span class="w">  </span><span class="nt">ingredients</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">../jobs/dev/bar.json</span>
+</pre></div>
+</div>
+</section>
+<section id="recipes-prd-yml">
+<h5>recipes/prd.yml<a class="headerlink" href="#recipes-prd-yml" title="Link to this heading"></a></h5>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">job</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">foo</span>
+<span class="w">  </span><span class="nt">ingredients</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">../jobs/prd/foo.json</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">job</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bar</span>
+<span class="w">  </span><span class="nt">ingredients</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">../jobs/prd/bar.json</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="string-formatting-in-recipes">
+<h3>String Formatting in Recipes<a class="headerlink" href="#string-formatting-in-recipes" title="Link to this heading"></a></h3>
+<p>Recipes support string formatting. The strings should be enclosed in double quotes. We can simplify the example from
+the past section by leveraging this. Here calling <code class="docutils literal notranslate"><span class="pre">bake('recipe.yml',</span> <span class="pre">env='dev',</span> <span class="pre">job='foo')</span></code> would load
+<code class="docutils literal notranslate"><span class="pre">jobs/dev/foo.json</span></code>.</p>
+<section id="id8">
+<h4>Directory Structure<a class="headerlink" href="#id8" title="Link to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">recipe</span><span class="o">.</span><span class="n">yml</span>
+<span class="n">jobs</span><span class="o">/</span>
+    <span class="n">dev</span><span class="o">/</span>
+        <span class="n">foo</span><span class="o">.</span><span class="n">json</span>
+        <span class="n">bar</span><span class="o">.</span><span class="n">json</span>
+    <span class="n">prd</span><span class="o">/</span>
+        <span class="n">foo</span><span class="o">.</span><span class="n">json</span>
+        <span class="n">bar</span><span class="o">.</span><span class="n">json</span>
+</pre></div>
+</div>
+</section>
+<section id="id9">
+<h4>recipe.yml<a class="headerlink" href="#id9" title="Link to this heading"></a></h4>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">env</span><span class="p">:</span><span class="w"> </span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">dev</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">prd</span>
+<span class="w">  </span><span class="nt">job</span><span class="p">:</span><span class="w"> </span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">foo</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bar</span>
+<span class="w">  </span><span class="nt">ingredients</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;{env}/{job}.yml&quot;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="else-blocks">
+<h3>Else Blocks<a class="headerlink" href="#else-blocks" title="Link to this heading"></a></h3>
+<p>To avoid listing out exhaustive match patterns, use the <code class="docutils literal notranslate"><span class="pre">else</span></code> tag. Else matches whenever the
+previous entry did not match. Else blocks can include other conditions to act like an else-if,
+and can be strung together like a Python if-elif-else block.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">day</span><span class="p">:</span><span class="w"> </span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">saturday</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sunday</span>
+<span class="w">  </span><span class="nt">weather</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sunny</span>
+<span class="w">  </span><span class="nt">ingredients</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">hike.json</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">else</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">day</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">saturday</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">sunday</span>
+<span class="w">  </span><span class="nt">ingredients</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">movie.json</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">else</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">ingredients</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">work.json</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="creating-baker-objects">
+<h2>Creating Baker Objects<a class="headerlink" href="#creating-baker-objects" title="Link to this heading"></a></h2>
+<p>By default, when given a relative path confectioner looks in the current working directory (<code class="docutils literal notranslate"><span class="pre">os.getcwd()</span></code>). This is usually
+the directory from which the python process was started. If you are writing a python package that ships with
+config files, you may want to explicitly set the home directory as a directory containing all the config files in your
+package. You can do this by creating a <code class="docutils literal notranslate"><span class="pre">Baker</span></code> object. <code class="docutils literal notranslate"><span class="pre">Baker</span></code> objects expose wrappers for all the core confectioner
+functions (<code class="docutils literal notranslate"><span class="pre">bake</span></code>, <code class="docutils literal notranslate"><span class="pre">shop</span></code>, <code class="docutils literal notranslate"><span class="pre">prep</span></code>, <code class="docutils literal notranslate"><span class="pre">mix</span></code>). This allows you to use relative paths for readability and portability while
+still ensuring you can specify exactly where your config files live.</p>
+<section id="id10">
+<h3>Directory Structure<a class="headerlink" href="#id10" title="Link to this heading"></a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">setup</span><span class="o">.</span><span class="n">py</span>
+<span class="n">mypackage</span><span class="o">/</span>
+    <span class="n">main</span><span class="o">.</span><span class="n">py</span>
+    <span class="n">utils</span><span class="o">.</span><span class="n">py</span>
+    <span class="n">conf</span><span class="o">/</span>
+        <span class="n">recipe</span><span class="o">.</span><span class="n">yml</span>
+        <span class="n">ingredient1</span><span class="o">.</span><span class="n">json</span>
+        <span class="n">ingredient2</span><span class="o">.</span><span class="n">json</span>
+</pre></div>
+</div>
+</section>
+<section id="mypackage-main-py">
+<h3>mypackage/main.py<a class="headerlink" href="#mypackage-main-py" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">confectioner</span> <span class="kn">import</span> <span class="n">Baker</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+
+<span class="n">curdir</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+<span class="n">home</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">curdir</span><span class="p">,</span> <span class="s1">&#39;conf&#39;</span><span class="p">)</span>
+
+<span class="n">baker</span> <span class="o">=</span> <span class="n">Baker</span><span class="p">(</span><span class="n">home</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">load_config</span><span class="p">(</span><span class="n">arg1</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">baker</span><span class="o">.</span><span class="n">bake</span><span class="p">(</span><span class="s1">&#39;recipe.yml&#39;</span><span class="p">,</span> <span class="n">arg1</span><span class="o">=</span><span class="n">arg1</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="extending-io">
+<h2>Extending IO<a class="headerlink" href="#extending-io" title="Link to this heading"></a></h2>
+<p>Out of the box, confectioner supports reading and writing json and yaml files from the local filesystem. However, you can
+extend confectioner to support other file types and other storage locations using
+<code class="docutils literal notranslate"><span class="pre">confectioner.files.register_reader</span></code> and <code class="docutils literal notranslate"><span class="pre">confectioner.files.register_loader</span></code>.</p>
+<section id="registering-a-reader">
+<h3>Registering a Reader<a class="headerlink" href="#registering-a-reader" title="Link to this heading"></a></h3>
+<p><em>Readers</em> are functions that take a path and return a file IO object (like the built-in <code class="docutils literal notranslate"><span class="pre">open</span></code> function). If you want
+to support a file on a new file system, such as azure blob storage, you can register a reader by providing a function
+that handles azure blob storage paths as well as the protocol for those paths.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">typing</span>
+
+<span class="kn">import</span> <span class="nn">confectioner.files</span>
+
+<span class="k">def</span> <span class="nf">azure_blob_reader</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">IO</span><span class="p">:</span>
+    <span class="o">...</span>
+
+<span class="n">confectioner</span><span class="o">.</span><span class="n">files</span><span class="o">.</span><span class="n">register_reader</span><span class="p">(</span><span class="s1">&#39;abfss&#39;</span><span class="p">,</span> <span class="n">azure_blob_reader</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="registering-a-loader">
+<h3>Registering a Loader<a class="headerlink" href="#registering-a-loader" title="Link to this heading"></a></h3>
+<p><em>Loaders</em> are functions that take a file IO object and return a python object representation of the contents of
+the IO (like the <code class="docutils literal notranslate"><span class="pre">json.load</span></code> function from the standard library). To provide support for a new file type, such as
+toml, you can register a loader by providing a function that handles the file type and the file extension where
+it should be used.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">typing</span>
+
+<span class="kn">import</span> <span class="nn">confectioner.files</span>
+
+<span class="k">def</span> <span class="nf">toml_loader</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="n">typing</span><span class="o">.</span><span class="n">IO</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">typing</span><span class="o">.</span><span class="n">Any</span><span class="p">:</span>
+    <span class="o">...</span>
+
+<span class="n">confectioner</span><span class="o">.</span><span class="n">files</span><span class="o">.</span><span class="n">register_loader</span><span class="p">(</span><span class="s1">&#39;.toml&#39;</span><span class="p">,</span> <span class="n">toml_loader</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="api.html" class="btn btn-neutral float-right" title="Confectioner API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, 84.51 LLC.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
