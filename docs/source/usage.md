@@ -173,6 +173,17 @@ When this file is loaded, the `INPUT_PATH` entry will be populated with the valu
 This allows us to avoid duplicating information across config files.
 
 
+### Environment Variables
+To dynamically pull environment variables into your config files, you can use the special `@env` context that is 
+available. For example, the following file would include the `API_KEY` environment variable.
+
+```json
+{
+  "API_KEY": "{@env.API_KEY}"
+}
+```
+
+
 ## More Complex Recipes
 
 ### Multiple Match Conditions
