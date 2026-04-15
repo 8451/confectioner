@@ -38,7 +38,7 @@ def _validate_kwargs(kwargs):
 
 @ShopError.catch
 def shop(
-    _recipe: str, _where: Optional[str] = None, _strict: bool = True, **kwargs
+    _recipe: str, _where: Optional[str] = None, _strict: bool = True, **kwargs: Any
 ) -> List[str]:
     """Using a recipe, find the appropriate ingredient files
 
@@ -184,7 +184,7 @@ def bake(
     _report: Union[bool, Callable] = False,
     _where: Optional[str] = None,
     _strict: bool = True,
-    **kwargs,
+    **kwargs: Any,
 ) -> Dict[str, Any]:
     """Bake (merge) a set of ingredients into a finished product (dictionary).
 
@@ -243,7 +243,7 @@ def _bake_list(
     _resolve: bool = True,
     _eager: bool = False,
     _report: Union[bool, Callable] = False,
-    **kwargs,
+    **kwargs: Any,
 ) -> Dict[str, Any]:
     if _eager and not _resolve:
         warnings.warn("_eager=True is ignored when _resolve=False")
@@ -283,7 +283,7 @@ def _bake_str(
     _strict: bool = True,
     _resolve: bool = True,
     _eager: bool = False,
-    **kwargs,
+    **kwargs: Any,
 ) -> Dict[str, Any]:
     ingredients = shop(_recipe=_recipe, _where=_where, _strict=_strict, **kwargs)
 

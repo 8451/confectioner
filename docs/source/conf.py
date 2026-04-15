@@ -12,27 +12,22 @@
 #
 import os
 import sys
+
 import sphinx_rtd_theme
 
-sys.path.insert(0, os.path.abspath('.'))
+_ = sphinx_rtd_theme
 
-
-def get_version(path: str):
-    temporary_globals = {}  # type: ignore
-    with open(path) as f:
-        exec(f.read(), temporary_globals)
-
-    return temporary_globals["__version__"]
+sys.path.insert(0, os.path.abspath("."))
 
 
 # -- Project information -----------------------------------------------------
 
-project = 'confectioner'
-copyright = '2024, 84.51 LLC'
-author = 'Austin Warner'
+project = "confectioner"
+copyright = "2024, 84.51 LLC"
+author = "Austin Warner"
 
 # The full version, including alpha/beta/rc tags
-release = get_version('../../confectioner/_version.py')
+release = "1.2.0"
 
 
 # -- General configuration ---------------------------------------------------
@@ -41,23 +36,23 @@ release = get_version('../../confectioner/_version.py')
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.githubpages',
-    'sphinx.ext.autodoc',
-    'sphinx.ext.autosummary',
-    'sphinx.ext.napoleon',
-    'sphinx_rtd_theme',
-    'myst_parser'
+    "sphinx.ext.githubpages",
+    "sphinx.ext.autodoc",
+    "sphinx.ext.autosummary",
+    "sphinx.ext.napoleon",
+    "sphinx_rtd_theme",
+    "myst_parser",
 ]
 
 # Add any paths that contain templates here, relative to this directory.
-templates_path = ['_templates']
+templates_path = ["_templates"]
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']
+exclude_patterns = ["_build", "Thumbs.db", ".DS_Store"]
 
-autodoc_member_order = 'bysource'
+autodoc_member_order = "bysource"
 
 
 # -- Options for HTML output -------------------------------------------------
@@ -65,9 +60,9 @@ autodoc_member_order = 'bysource'
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = 'sphinx_rtd_theme'
+html_theme = "sphinx_rtd_theme"
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-html_static_path = ['_static']
+html_static_path = ["_static"]

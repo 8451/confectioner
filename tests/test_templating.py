@@ -1,3 +1,5 @@
+import os
+
 import pytest
 
 from confectioner.templating import (
@@ -78,3 +80,10 @@ def test_set_dotted_key():
 
     set_dotted_key("A.B.D", "y", d)
     assert d == {"A": {"B": {"C": "x", "D": "y"}}}
+
+
+def test_environment_variables():
+    os.environ["FOO"] = "bar"
+    assert resolve("{@env.FOO}") == "bar"
+    assert resolve(["{@env.FOO}"]) == ["bar"]
+    assert resolve({"foo": "{@env.FOO}"}) == {"foo": "bar"}

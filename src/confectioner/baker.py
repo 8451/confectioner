@@ -1,8 +1,27 @@
 import functools
 import os
-from typing import Optional
+import sys
+from typing import Callable, Optional, TypeVar
+
+if sys.version_info < (3, 10):
+    from typing_extensions import Concatenate, ParamSpec  # pragma: no cover
+else:
+    from typing import Concatenate, ParamSpec  # pragma: no cover
 
 from . import core
+
+P = ParamSpec("P")
+R = TypeVar("R")
+
+
+def _wraps(__func: Callable[P, R]):
+    def wrapper(
+        __method: Callable[Concatenate["Baker", P], R],
+    ) -> Callable[Concatenate["Baker", P], R]:
+        __method.__doc__ = __func.__doc__
+        return __method
+
+    return wrapper
 
 
 class Baker:
@@ -43,7 +62,7 @@ class Baker:
 
         self._home = h
 
-    @functools.wraps(core.shop)
+    @_wraps(core.shop)
     def shop(self, *args, **kwargs):
         kwargs.setdefault("_where", self._home)
         return core.shop(*args, **kwargs)
@@ -58,7 +77,7 @@ class Baker:
     def mix(*args, **kwargs):
         return core.mix(*args, **kwargs)
 
-    @functools.wraps(core.bake)
+    @_wraps(core.bake)
     def bake(self, *args, **kwargs):
         kwargs.setdefault("_where", self._home)
         return core.bake(*args, **kwargs)
