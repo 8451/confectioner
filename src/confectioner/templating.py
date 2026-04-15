@@ -1,6 +1,9 @@
+import os
 import re
 from dataclasses import dataclass
 from typing import Any, Callable, Dict, List, Mapping, Optional, Set, Union
+
+TEMPLATE_KEY = re.compile(r"(?<!\\){([^\\]*?)}")
 
 
 @dataclass(frozen=True)
@@ -64,9 +67,9 @@ def resolve(
         if isinstance(o, Mapping):
             options = o
         else:
-            raise TypeError(
-                f"An options must be passed to resolve an object of type {type(o)}"
-            )
+            options = {}
+
+    options = {**options, "@env": os.environ.copy()}
 
     if isinstance(o, Mapping):
         return {
@@ -209,7 +212,7 @@ def find_template_keys(o: str) -> Set[str]:
     Set[str]
         The set of template keys.
     """
-    return set(re.findall(r"(?<!\\){([^\\]*?)}", o))
+    return set(re.findall(TEMPLATE_KEY, o))
 
 
 def _single_dotted_key(o: str):
