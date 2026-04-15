@@ -4,7 +4,7 @@ build-backend = "uv_build"
 
 [project]
 name = "confectioner"
-version = "1.1.0"
+version = "1.2.0"
 authors = [
     {name = "Austin Warner", email = "austin.warner@8451.com"},
     {name = "Michael Stoepel", email = "michael.stoepel@8451.com"},
