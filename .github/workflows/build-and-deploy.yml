@@ -17,17 +17,31 @@ on:
 
 jobs:
   test:
+    name: "Test"
     uses: ./.github/workflows/test.yml
 
   build:
+    name: "Build"
     uses: ./.github/workflows/build.yml
     needs: test
 
   publish:
-    uses: ./.github/workflows/publish.yml
+    name: "Publish"
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: ${{ github.event.release && 'release' || 'test-release' }}
+      url: ${{ vars.RELEASE_URL }}
     permissions:
       id-token: write
-    with:
-      # release if this is a published release, test-release otherwise
-      environment: ${{ github.event.release && 'release' || 'test-release' }}
-    needs: build
+    steps:
+      - name: Download Build Artifact
+        uses: actions/download-artifact@v8
+        with:
+          name: build
+          path: dist/
+      - name: Publish package distributions to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: ${{ vars.RELEASE_REPOSITORY_URL }}
+          skip-existing: ${{ vars.RELEASE_SKIP_EXISTING }}
