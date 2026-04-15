@@ -12,16 +12,15 @@ on:
   workflow_call:
     inputs:
       environment:
-        description: 'The environment to deploy to'
+        description: "The environment to deploy to"
         required: true
         type: string
   workflow_dispatch:
     inputs:
       environment:
-        description: 'The environment to deploy to'
+        description: "The environment to deploy to"
         required: true
         type: string
-
 
 jobs:
   publish:
@@ -34,7 +33,7 @@ jobs:
       id-token: write
     steps:
       - name: Download Build Artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v8
         with:
           name: build
           path: dist/
