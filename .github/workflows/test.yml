@@ -22,12 +22,14 @@ jobs:
       - name: Set up Python ${{ matrix.python-version }}
         run: uv python install ${{ matrix.python-version }}
       - name: Lint with ruff
-        run: uv run --lint ruff check src
+        run: uv run --group lint ruff check src
+      - name: Typecheck with mypy
+        run: uv run --group typecheck mypy src
       - name: Test with pytest
         run: |
-          uv run --test pytest --cov=confectioner --cov-report=xml
+          uv run --group test pytest --cov=confectioner --cov-report=xml
       - name: Update coverage badge
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.python-version == '3.9'}}
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && matrix.python-version == '3.14'}}
         run: |
           coverage-badge -o coverage.svg
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
