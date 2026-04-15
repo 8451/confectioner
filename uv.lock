@@ -554,7 +554,7 @@ dependencies = [
     { name = "typing-extensions", version = "4.15.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.9.*'" },
 ]
 
-[package.optional-dependencies]
+[package.dev-dependencies]
 dev = [
     { name = "bump2version" },
     { name = "coverage", version = "7.6.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9'" },
@@ -591,7 +591,7 @@ dev = [
     { name = "types-pyyaml", version = "6.0.12.20250915", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.9.*'" },
     { name = "types-pyyaml", version = "6.0.12.20260408", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
 ]
-doc = [
+docs = [
     { name = "myst-parser", version = "3.0.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.10'" },
     { name = "myst-parser", version = "4.0.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.10.*'" },
     { name = "myst-parser", version = "5.0.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.11'" },
@@ -607,6 +607,9 @@ doc = [
     { name = "sphinxemoji", version = "0.2.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9'" },
     { name = "sphinxemoji", version = "0.3.2", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.9'" },
 ]
+lint = [
+    { name = "ruff" },
+]
 test = [
     { name = "coverage", version = "7.6.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9'" },
     { name = "coverage", version = "7.10.7", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.9.*'" },
@@ -618,40 +621,60 @@ test = [
     { name = "pytest-cov", version = "5.0.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9'" },
     { name = "pytest-cov", version = "7.1.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.9'" },
 ]
-
-[package.dev-dependencies]
-dev = [
-    { name = "confectioner", extra = ["dev"] },
+typecheck = [
+    { name = "mypy", version = "1.14.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9'" },
+    { name = "mypy", version = "1.19.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.9.*'" },
+    { name = "mypy", version = "1.20.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
+    { name = "types-pyyaml", version = "6.0.12.20241230", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9'" },
+    { name = "types-pyyaml", version = "6.0.12.20250915", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version == '3.9.*'" },
+    { name = "types-pyyaml", version = "6.0.12.20260408", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.10'" },
 ]
 
 [package.metadata]
 requires-dist = [
-    { name = "bump2version", marker = "extra == 'dev'" },
-    { name = "confectioner", extras = ["doc"], marker = "extra == 'dev'", editable = "." },
-    { name = "confectioner", extras = ["test"], marker = "extra == 'dev'", editable = "." },
-    { name = "coverage", marker = "extra == 'dev'" },
-    { name = "coverage", marker = "extra == 'test'" },
-    { name = "coverage-badge", marker = "extra == 'test'" },
-    { name = "mypy", marker = "extra == 'dev'" },
-    { name = "myst-parser", marker = "extra == 'doc'" },
-    { name = "nbsphinx", marker = "extra == 'doc'" },
-    { name = "pre-commit", marker = "extra == 'dev'" },
-    { name = "pytest", marker = "extra == 'test'" },
-    { name = "pytest-cov", marker = "extra == 'test'" },
     { name = "pyyaml", specifier = ">=5.0" },
-    { name = "recommonmark", marker = "extra == 'doc'" },
-    { name = "ruff", marker = "extra == 'dev'" },
-    { name = "sphinx", marker = "extra == 'doc'" },
-    { name = "sphinx-rtd-theme", marker = "extra == 'doc'" },
-    { name = "sphinxcontrib-napoleon", marker = "extra == 'doc'" },
-    { name = "sphinxemoji", marker = "extra == 'doc'" },
-    { name = "types-pyyaml", marker = "extra == 'dev'" },
     { name = "typing-extensions", marker = "python_full_version < '3.10'", specifier = ">=4.0" },
 ]
-provides-extras = ["test", "doc", "dev"]
 
 [package.metadata.requires-dev]
-dev = [{ name = "confectioner", extras = ["dev"], editable = "." }]
+dev = [
+    { name = "bump2version" },
+    { name = "coverage" },
+    { name = "coverage-badge" },
+    { name = "mypy" },
+    { name = "myst-parser" },
+    { name = "nbsphinx" },
+    { name = "pre-commit" },
+    { name = "pytest" },
+    { name = "pytest-cov" },
+    { name = "recommonmark" },
+    { name = "ruff" },
+    { name = "sphinx" },
+    { name = "sphinx-rtd-theme" },
+    { name = "sphinxcontrib-napoleon" },
+    { name = "sphinxemoji" },
+    { name = "types-pyyaml" },
+]
+docs = [
+    { name = "myst-parser" },
+    { name = "nbsphinx" },
+    { name = "recommonmark" },
+    { name = "sphinx" },
+    { name = "sphinx-rtd-theme" },
+    { name = "sphinxcontrib-napoleon" },
+    { name = "sphinxemoji" },
+]
+lint = [{ name = "ruff" }]
+test = [
+    { name = "coverage" },
+    { name = "coverage-badge" },
+    { name = "pytest" },
+    { name = "pytest-cov" },
+]
+typecheck = [
+    { name = "mypy" },
+    { name = "types-pyyaml" },
+]
 
 [[package]]
 name = "coverage"

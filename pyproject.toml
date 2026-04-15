@@ -36,29 +36,13 @@ dependencies = [
 [project.license]
 file = "LICENSE"
 
-[tool.hatch.version]
-path = "confectioner/_version.py"
-
 [project.urls]
 repository = "https://github.com/8451/confectioner"
 documentation = "https://8451.github.io/confectioner"
 bugs = "https://github.com/8451/confectioner/issues"
 
-[project.optional-dependencies]
-dev = [
-    "bump2version",
-    "mypy",
-    "ruff",
-    "pre-commit",
-    "coverage",
-    "types-pyyaml",
-    "confectioner[lint]",
-    "confectioner[test]",
-    "confectioner[doc]",
-]
-
 [dependency-groups]
-doc = [
+docs = [
     "nbsphinx",
     "recommonmark",
     "sphinx",
@@ -81,9 +65,9 @@ typecheck = [
     "types-pyyaml",
 ]
 dev = [
-    "bymp2version",
+    "bump2version",
     "pre-commit",
-    {include-group = "doc"},
+    {include-group = "docs"},
     {include-group = "lint"},
     {include-group = "test"},
     {include-group = "typecheck"},
