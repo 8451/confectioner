@@ -45,12 +45,19 @@ documentation = "https://8451.github.io/confectioner"
 bugs = "https://github.com/8451/confectioner/issues"
 
 [project.optional-dependencies]
-test = [
+dev = [
+    "bump2version",
+    "mypy",
+    "ruff",
+    "pre-commit",
     "coverage",
-    "coverage-badge",
-    "pytest",
-    "pytest-cov",
+    "types-pyyaml",
+    "confectioner[lint]",
+    "confectioner[test]",
+    "confectioner[doc]",
 ]
+
+[dependency-groups]
 doc = [
     "nbsphinx",
     "recommonmark",
@@ -60,19 +67,26 @@ doc = [
     "myst-parser",
     "sphinxemoji",
 ]
-dev = [
-    "bump2version",
-    "mypy",
-    "pre-commit",
-    "coverage",
-    "types-pyyaml",
-    "confectioner[test]",
-    "confectioner[doc]",
+lint = [
+    "ruff"
 ]
-
-[dependency-groups]
+test = [
+    "coverage",
+    "coverage-badge",
+    "pytest",
+    "pytest-cov",
+]
+typecheck = [
+    "mypy",
+    "types-pyyaml",
+]
 dev = [
-    "confectioner[dev]",
+    "bymp2version",
+    "pre-commit",
+    {include-group = "doc"},
+    {include-group = "lint"},
+    {include-group = "test"},
+    {include-group = "typecheck"},
 ]
 
 [[tool.uv.index]]
