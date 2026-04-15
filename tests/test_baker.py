@@ -12,7 +12,7 @@ def test_home(data: str, pantry: str, recipe: str):
     assert baker.home == os.getcwd()
 
     with pytest.raises(TypeError):
-        baker.home = None
+        baker.home = None  # type: ignore
     with pytest.raises(NotADirectoryError):
         baker.home = recipe
 

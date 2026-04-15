@@ -1,9 +1,10 @@
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["uv_build>=0.9.17,<0.11.6"]
+build-backend = "uv_build"
 
 [project]
 name = "confectioner"
+version = "1.1.0"
 authors = [
     {name = "Austin Warner", email = "austin.warner@8451.com"},
     {name = "Michael Stoepel", email = "michael.stoepel@8451.com"},
@@ -23,13 +24,14 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
     "Programming Language :: Python",
 ]
 dependencies = [
     "PyYAML>=5.0",
     "typing_extensions>=4.0; python_version<\"3.10\"",
 ]
-dynamic = ["version"]
 
 [project.license]
 file = "LICENSE"
@@ -61,32 +63,21 @@ doc = [
 dev = [
     "bump2version",
     "mypy",
-    "black",
-    "flake8>=3.7.9",
     "pre-commit",
     "coverage",
+    "types-pyyaml",
     "confectioner[test]",
     "confectioner[doc]",
 ]
 
-[tool.pytest.ini_options]
-testpaths = [
-    "tests/"
+[dependency-groups]
+dev = [
+    "confectioner[dev]",
 ]
 
-[tool.black]
-line-length = 88
-include = '\.pyi?$'
-exclude = '''
-/(
-    \.git
-  | \.hg
-  | \.mypy_cache
-  | \.tox
-  | \.venv
-  | _build
-  | buck-out
-  | build
-  | dist
-)/
-'''
+[[tool.uv.index]]
+url = "https://pypi.org/simple"
+default = true
+
+[tool.uv.sources]
+confectioner = { workspace = true }

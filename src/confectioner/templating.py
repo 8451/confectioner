@@ -1,6 +1,6 @@
 import re
 from dataclasses import dataclass
-from typing import Any, Callable, Dict, Mapping, Optional, Set, Union
+from typing import Any, Callable, Dict, List, Mapping, Optional, Set, Union
 
 
 @dataclass(frozen=True)
@@ -61,7 +61,12 @@ def resolve(
         report = _ResolveReporter(True, logger=report)
 
     if options is None:
-        options = o
+        if isinstance(o, Mapping):
+            options = o
+        else:
+            raise TypeError(
+                f"An options must be passed to resolve an object of type {type(o)}"
+            )
 
     if isinstance(o, Mapping):
         return {
@@ -94,7 +99,7 @@ def resolve(
         return o
 
 
-def get_dotted_key(dotted: str, options: Union[Mapping[str, Any], list]) -> Any:
+def get_dotted_key(dotted: str, options: Union[Mapping[str, Any], List[Any]]) -> Any:
     """
     Get a nested value from a dictionary or list using a dotted key.
 
@@ -164,7 +169,9 @@ def set_dotted_key(dotted: str, val: Any, options: Dict[str, Any]) -> None:
         set_dotted_key(rest, val, options[key])
 
 
-def dotted_key_exists(dotted: str, options: Union[Mapping[str, Any], list]) -> bool:
+def dotted_key_exists(
+    dotted: str, options: Union[Mapping[str, Any], List[Any]]
+) -> bool:
     """
     Check if a dotted key exists in a dictionary or list.
 
