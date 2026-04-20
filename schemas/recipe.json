@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Confectioner Recipe",
+  "description": "A recipe file for the confectioner configuration framework. A recipe is a list of entries; each entry specifies optional match conditions and the ingredient/sub-recipe files to include when those conditions are met.",
+  "type": "array",
+  "items": {
+    "$ref": "#/$defs/recipeEntry"
+  },
+  "$defs": {
+    "recipeEntry": {
+      "type": "object",
+      "description": "A single recipe entry. Reserved keys (ingredients, recipes, else) control what is loaded and when. All other keys are match conditions that must be satisfied for this entry to apply.",
+      "properties": {
+        "ingredients": {
+          "description": "Ingredient file path(s) to include when this entry matches. Relative paths are resolved relative to the recipe file.",
+          "oneOf": [
+            {
+              "type": "string",
+              "description": "Path to a single ingredient file. May use {kwarg} string formatting."
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "description": "Paths to multiple ingredient files. Each may use {kwarg} string formatting."
+            }
+          ]
+        },
+        "recipes": {
+          "description": "Sub-recipe file path(s) to include when this entry matches. Sub-recipes are queried with the same kwargs as the parent recipe. Relative paths are resolved relative to the recipe file.",
+          "oneOf": [
+            {
+              "type": "string",
+              "description": "Path to a single sub-recipe file."
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1,
+              "description": "Paths to multiple sub-recipe files."
+            }
+          ]
+        },
+        "else": {
+          "description": "When present, this entry only applies if the immediately preceding entry did not match. Can be combined with additional match conditions to act as an else-if. The value of this key is ignored."
+        }
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/matchCondition"
+      }
+    },
+    "matchCondition": {
+      "description": "A match condition value. The entry applies only when the corresponding kwarg equals this value (scalar) or is contained in this value (list). String formatting with {kwarg} syntax is supported in string values.",
+      "oneOf": [
+        {
+          "$ref": "#/$defs/scalar"
+        },
+        {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/scalar"
+          },
+          "minItems": 1,
+          "description": "A list of acceptable values; the entry matches if the kwarg equals any value in the list."
+        }
+      ]
+    },
+    "scalar": {
+      "description": "A scalar match value: string, number, boolean, or null.",
+      "type": ["string", "number", "boolean", "null"]
+    }
+  }
+}
